@@ -2,14 +2,23 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const UserDetails = () => {
+  const [user, setUser] = useState([]);
+  const [userDetails, setUserDetails] = useState({});
 
-    const [userDetails, setUserDetails] = useState({})
+  useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then((res) => res.json())
+      .then((data) => setUser(data));
+  }, []);
 
-    useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/users/1')
-    .then(res => res.json())
-    .then(data => setUserDetails(data))
-    }, [])
+  useEffect(() => {
+      fetch(`https://jsonplaceholder.typicode.com/users/${user.id}`)
+        .then((res) => res.json())
+        .then((data) => setUserDetails(data));
+  }, [user]);
+
+  console.log(userDetails)
+
   return (
     <div>
       <h1>Details about user: {userDetails.id}</h1>
