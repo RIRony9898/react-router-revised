@@ -12,6 +12,7 @@ import Law from "./components/Departments/Law.jsx";
 import Home from "./components/Home/Home.jsx";
 import Login from "./components/Login/Login.jsx";
 import "./index.css";
+import UserDetails from "./components/Departments/UserDetails.jsx";
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
@@ -19,17 +20,19 @@ createRoot(document.getElementById("root")).render(
       <Route path="/" element={<App />}>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/department" element={<Departments />} loader={()=>fetch('https://jsonplaceholder.typicode.com/users')}>
+        <Route path="/department" element={<Departments />} >
           <Route path="/department/:id" element={<Departments />} />
           <Route path="/department/cse" element={<Cse />} />
           <Route path="/department/eee" element={<Eee />} />
           <Route path="/department/bba" element={<Bba />} />
           <Route path="/department/english" element={<English />} />
           <Route path="/department/law" element={<Law />} />
+          
         </Route>
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
         <Route path="/*" element={<Login />} />
+        <Route path="/department/user/:id" element={<UserDetails />} />
       </Route>
     </Routes>
   </BrowserRouter>
